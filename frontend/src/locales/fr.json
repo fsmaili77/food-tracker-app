@@ -1,0 +1,28 @@
+{
+  "title": "Suivi des dates de péremption",
+  "form": {
+    "foodName": "Nom de l'aliment",
+    "expirationDate": "Date de péremption",
+    "addButton": "Ajouter l'aliment"
+  },
+  "foodItems": {
+    "title": "Aliments enregistrés",
+    "name": "Nom",
+    "expirationDate": "Date de péremption",
+    "status": "Statut",
+    "actions": "Actions",
+    "delete": "Supprimer",
+    "noItems": "Aucun aliment trouvé."
+  },
+  "status": {
+    "expiringSoon": "Expire bientôt",
+    "goodToUse": "Bon à consommer"
+  },
+  "error": {
+    "missingFields": "Veuillez saisir le nom et la date de péremption",
+    "duplicateItem": "Un aliment portant ce nom existe déjà",
+    "addFailed": "Échec de l'ajout de l'aliment",
+    "deleteFailed": "Échec de la suppression de l'aliment"
+  }
+}
+

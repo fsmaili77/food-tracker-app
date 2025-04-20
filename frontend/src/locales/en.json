@@ -1,0 +1,28 @@
+{
+    "title": "Food Expiration Tracker",
+    "form": {
+      "foodName": "Food Name",
+      "expirationDate": "Expiration Date",
+      "addButton": "Add Food Item"
+    },
+    "foodItems": {
+      "title": "Food Items",
+      "name": "Name",
+      "expirationDate": "Expiration Date",
+      "status": "Status",
+      "actions": "Actions",
+      "delete": "Delete"
+    },
+    "status": {
+      "expiringSoon": "Expiring soon",
+      "goodToUse": "Good to use"
+    },
+    "errors": {
+      "pleaseEnterBoth": "Please enter both name and expiration date",
+      "foodExists": "Food item with this name already exists",
+      "errorLoading": "Error loading food items",
+      "failedAdd": "Failed to add food item",
+      "failedDelete": "Failed to delete food item"
+    }
+  }
+  

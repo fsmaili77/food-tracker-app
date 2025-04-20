@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import i18n from './i18n';
+import { useTranslation } from 'react-i18next'; // Import the useTranslation hook
 
 interface FoodItem {
   id: number;
@@ -7,6 +9,7 @@ interface FoodItem {
 }
 
 const App: React.FC = () => {
+  const { t, i18n } = useTranslation(); // Destructure t and i18n from useTranslation
   const [foodItems, setFoodItems] = useState<FoodItem[]>([]);
   const [name, setName] = useState('');
   const [expirationDate, setExpirationDate] = useState('');
@@ -32,7 +35,7 @@ const App: React.FC = () => {
     setError('');
 
     if (!name.trim() || !expirationDate) {
-      setError('Please enter both name and expiration date');
+      setError(t('error.missingFields')); // Use t for translations
       return;
     }
 
@@ -44,13 +47,13 @@ const App: React.FC = () => {
       });
 
       if (response.status === 409) {
-        setError('Food item with this name already exists');
+        setError(t('error.duplicateItem')); // Use t for translations
         return;
       }
 
       if (!response.ok) {
         const text = await response.text();
-        setError(text || 'Failed to add food item');
+        setError(text || t('error.addFailed')); // Use t for translations
         return;
       }
 
@@ -58,7 +61,7 @@ const App: React.FC = () => {
       setExpirationDate('');
       fetchFoodItems();
     } catch (err) {
-      setError('Failed to add food item');
+      setError(t('error.addFailed')); // Use t for translations
     }
   };
 
@@ -68,12 +71,12 @@ const App: React.FC = () => {
         method: 'DELETE',
       });
       if (!response.ok) {
-        setError('Failed to delete food item');
+        setError(t('error.deleteFailed')); // Use t for translations
         return;
       }
       fetchFoodItems();
     } catch (err) {
-      setError('Failed to delete food item');
+      setError(t('error.deleteFailed')); // Use t for translations
     }
   };
 
@@ -82,18 +85,30 @@ const App: React.FC = () => {
     const expDate = new Date(expirationDate);
     const diffDays = (expDate.getTime() - now.getTime()) / (1000 * 3600 * 24);
     if (diffDays <= 7) {
-      return { text: 'Expiring soon', color: 'red' };
+      return { text: t('status.expiringSoon'), color: 'red' }; // Use t for translations
     }
-    return { text: 'Good to use', color: 'green' };
+    return { text: t('status.goodToUse'), color: 'green' }; // Use t for translations
+  };
+
+  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    i18n.changeLanguage(e.target.value);
   };
 
   return (
     <div className="container mt-4">
-      <h1>Food Expiration Tracker</h1>
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <h1>{t('title')}</h1>
+        <select onChange={handleLanguageChange} className="form-select w-auto">
+          <option value="en">English</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+
+        </select>
+      </div>
 
       <form onSubmit={handleAdd} className="mb-4">
         <div className="mb-3">
-          <label htmlFor="name" className="form-label">Food Name</label>
+          <label htmlFor="name" className="form-label">{t('form.foodName')}</label>
           <input
             id="name"
             className="form-control"
@@ -104,7 +119,7 @@ const App: React.FC = () => {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="expirationDate" className="form-label">Expiration Date</label>
+          <label htmlFor="expirationDate" className="form-label">{t('form.expirationDate')}</label>
           <input
             id="expirationDate"
             type="date"
@@ -117,20 +132,20 @@ const App: React.FC = () => {
 
         {error && <div className="alert alert-danger">{error}</div>}
 
-        <button type="submit" className="btn btn-primary">Add Food Item</button>
+        <button type="submit" className="btn btn-primary">{t('form.addButton')}</button>
       </form>
 
-      <h2>Food Items</h2>
+      <h2>{t('foodItems.title')}</h2>
       {foodItems.length === 0 ? (
-        <p>No food items found.</p>
+        <p>{t('foodItems.noItems')}</p>
       ) : (
         <table className="table table-striped">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Expiration Date</th>
-              <th>Status</th>
-              <th>Actions</th>
+              <th>{t('foodItems.name')}</th>
+              <th>{t('foodItems.expirationDate')}</th>
+              <th>{t('foodItems.status')}</th>
+              <th>{t('foodItems.actions')}</th>
             </tr>
           </thead>
           <tbody>
@@ -146,7 +161,7 @@ const App: React.FC = () => {
                       className="btn btn-danger btn-sm"
                       onClick={() => handleDelete(item.id)}
                     >
-                      Delete
+                      {t('foodItems.delete')}
                     </button>
                   </td>
                 </tr>

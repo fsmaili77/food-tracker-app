@@ -1,0 +1,28 @@
+{
+  "title": "Ablaufdatum-Tracker",
+  "form": {
+    "foodName": "Lebensmittelname",
+    "expirationDate": "Ablaufdatum",
+    "addButton": "Lebensmittel hinzufügen"
+  },
+  "foodItems": {
+    "title": "Gespeicherte Lebensmittel",
+    "name": "Name",
+    "expirationDate": "Ablaufdatum",
+    "status": "Status",
+    "actions": "Aktionen",
+    "delete": "Löschen",
+    "noItems": "Keine Lebensmittel gefunden."
+  },
+  "status": {
+    "expiringSoon": "Bald ablaufend",
+    "goodToUse": "Noch haltbar"
+  },
+  "error": {
+    "missingFields": "Bitte Name und Ablaufdatum eingeben",
+    "duplicateItem": "Ein Lebensmittel mit diesem Namen existiert bereits",
+    "addFailed": "Hinzufügen des Lebensmittels fehlgeschlagen",
+    "deleteFailed": "Löschen des Lebensmittels fehlgeschlagen"
+  }
+}
+
